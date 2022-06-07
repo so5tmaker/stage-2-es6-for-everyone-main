@@ -22,12 +22,12 @@ const fighterDetailsMap = new Map();
 
 export async function getFighterInfo(fighterId) {
   // get fighter info from fighterDetailsMap or from service and write it to fighterDetailsMap
-  if (fighterDetailsMap.size === 0) {
+  console.log("fighterId", fighterId);
+  if (fighterDetailsMap.size === 0 || fighterDetailsMap.get('_id') !== fighterId) {
     const fighterInfo = await fighterService.getFighterDetails(fighterId);
-    Object.keys(fighterInfo).forEach((key) => fighterDetailsMap.set(key, fighterInfo[key]));
+    fighterDetailsMap.set('_id', fighterInfo);
   }
-  console.log(fighterDetailsMap);
-  return fighterDetailsMap;
+  return fighterDetailsMap.get('_id');
 }
 
 function renderSelectedFighters(selectedFighters) {
