@@ -22,7 +22,6 @@ const fighterDetailsMap = new Map();
 
 export async function getFighterInfo(fighterId) {
   // get fighter info from fighterDetailsMap or from service and write it to fighterDetailsMap
-  console.log("fighterId", fighterId);
   if (fighterDetailsMap.size === 0 || fighterDetailsMap.get('_id') !== fighterId) {
     const fighterInfo = await fighterService.getFighterDetails(fighterId);
     fighterDetailsMap.set('_id', fighterInfo);
