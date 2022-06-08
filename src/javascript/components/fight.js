@@ -38,8 +38,6 @@ export async function fight(firstFighter, secondFighter) {
   }
 
   return new Promise((resolve) => {
-    document.addEventListener('keydown', handleKeyDown);
-    document.addEventListener('keyup', handleKeyUp);
     const handleKeyDown = (e) => {
       e.preventDefault();
       pressedKeys.add(e.code);
@@ -53,6 +51,8 @@ export async function fight(firstFighter, secondFighter) {
         resolve(wonFighter);
       }
     }
+    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('keyup', handleKeyUp);
     // resolve the promise with the winner when fight is over
   });
 }
@@ -179,7 +179,7 @@ export function getDamage(attacker, defender) {
 }
 
 export function getHitPower(fighter) {
-  const { attack } = fighter;
+  const attack = fighter;
   const criticalHitChance = Math.random() + 1;
   const power = attack * criticalHitChance
   return power;
@@ -187,7 +187,7 @@ export function getHitPower(fighter) {
 }
 
 export function getBlockPower(fighter) {
-  const { defense } = fighter;
+  const defense = fighter;
   const dodgeChance = Math.random() + 1;
   const power = defense * dodgeChance;
   return power;
