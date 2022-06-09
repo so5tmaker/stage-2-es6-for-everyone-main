@@ -9,17 +9,10 @@ export function createFighterPreview(fighter, position) {
 
   // todo: show fighter info (image, name, health, etc.)
   if (fighter) {
-    Object.keys(fighter)
-      .filter(key => key !== '_id' && key !== 'source')
-      .forEach((key) => {
-        const fighterInfo = createElement({
-          tagName: 'div',
-          className: 'arena___fighter-name',
-        });
-        fighterInfo.innerHTML = `${key.toUpperCase()}: ${fighter[key]}`;
-        fighterElement.append(fighterInfo);
-      });
-  }
+    const fighterImage = createFighterImage(fighter);
+    const fighterInfo = createFighterInfo(fighter)
+    fighterElement.append(fighterImage, fighterInfo);
+  };
 
   return fighterElement;
 }
@@ -38,4 +31,22 @@ export function createFighterImage(fighter) {
   });
 
   return imgElement;
+}
+
+export function createFighterInfo(fighter) {
+  const { name, attack, defense, health } = fighter;
+  const fighterElement = createElement({
+    tagName: 'div',
+    className: 'fighter-preview___info',
+  });
+  const fighterElement1 = createElement({
+    tagName: 'div',
+  });
+  fighterElement.innerText =
+    `Name: ${name}
+    Attack: ${attack} 
+    Defense: ${defense} 
+    Health: ${health}`;
+
+  return fighterElement;
 }
