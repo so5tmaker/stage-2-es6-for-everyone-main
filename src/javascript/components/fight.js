@@ -8,6 +8,8 @@ const {
   PlayerOneCriticalHitCombination,
 } = controls;
 
+const idleCriticalHitTime = 10000;
+
 export async function fight(firstFighter, secondFighter) {
   return new Promise((resolve) => {
     const fightersOptions = {
@@ -22,7 +24,7 @@ export async function fight(firstFighter, secondFighter) {
         ...secondFighter
       },
       setCriticalHit(fighter) {
-        setTimeout(() => fighter.isCriticalHit = true, 10000);
+        setTimeout(() => fighter.isCriticalHit = true, idleCriticalHitTime);
       },
       setHealthIndicator(currentlyHealth, fighterHealth) {
         const indicator = currentlyHealth * 100 / fighterHealth;
